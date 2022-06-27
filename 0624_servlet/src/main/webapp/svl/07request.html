@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>06parameter.html</title>
+	</head>
+	<body>
+		<!-- method 선언이 없으면, 기본은 get. -->
+	<!--  <form action="../Request07"> -->	<!-- 내 자리에서 전송 -->
+		<form action="http://192.168.0.38:8080/0624_servlet/Request07"> <!-- 교수님 주소 -->
+		
+			name : <input type="text" name="txt">
+			<hr>
+			hidden : <input type="hidden" name="hid" value="data_hidden">
+			<hr>
+			season : <input type="radio" name="season" value="summer"> 여름
+					 <input type="radio" name="season" value="winter"> 겨울
+			<hr>
+			fruit : <input type="checkbox" name="fruit" value="cherry"> 체리
+					<input type="checkbox" name="fruit" value="peach"> 복숭아
+			<hr>
+			nation : <select name="nation">
+	      				<option value="kor1">대한민국</option>
+	      				<option value="kor2">코리아</option>
+	      				<option value="kor3">한국</option>
+					</select>
+			sports : <select name="sports" multiple="multiple"> <!-- multiple = 한 번에 여러개 선택 -->
+	      				<option value="baseball">야구</option>
+	      				<option value="soccer">축구</option>
+	      				<option value="tennis">테니스</option>
+					</select>
+			<hr>
+			area : <textarea rows="5" cols="30" name="area"></textarea>
+			<hr>
+			<input type="submit">			
+		</form>
+	</body>
+</html>
