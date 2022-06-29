@@ -12,7 +12,6 @@ public class Join13DAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} 
-		
 	}//constructor
 	
 	private Connection con;
@@ -21,11 +20,11 @@ public class Join13DAO {
 	private final String USER = "c##scott";
 	private final String PASSWORD = "tiger";  
 	
-	public int insertMember(MemberDTO dto) {
+	public int insertMember(MemberDTO dto) { //메소드
 		int successCount = 0;
 		String sql = "insert into member(mno, mid, mpwd, "
 				+ "tel1, tel2, tel3, email1, email2, mdate) values("
-				+ "seq.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+				+ "mno_seq.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			psmt = con.prepareStatement(sql);

@@ -52,6 +52,4 @@ public class MemberDTO {
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
-
-	
 }//class

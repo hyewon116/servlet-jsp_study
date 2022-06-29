@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>15board_write.html</title>
+	</head>
+	<body>
+		<h1>자유 게시판 글쓰기</h1>
+		<form id="form1" method="post"
+			action="http://localhost:8080/0624_servlet/Board15"> <!-- post 방식은 ?cmd=reg 같은 query string 지원x-->
+			<input type="hidden" id="cmd" name="cmd" value="reg"> <!-- 그래서 이렇게 추가 -->
+			<br><br>제목 : <input type="text" id="title" name="title" maxlength="50">  
+			<br><br>작성자 : <input type="text" id="writer" name="writer" maxlength="20">
+			<br><br>내용 : 
+				<textarea rows="10" cols="30" id="cnts" name="cnts" maxlength="500"></textarea>
+			<br><br><button type="submit"> 글 등 록 </button>
+		</form>
+	</body>
+</html>
+<!-- 
+drop table freeboard;
+PURGE RECYCLEBIN;
+create table freeboard(
+bno number(5,0)
+, btitle varchar2(150)
+, bwriter varchar2(60)
+, bcnts varchar2(1500)
+, bdate date
+);
+ -->
