@@ -7,6 +7,7 @@
 		<title>05scriptlet2.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<table border="1">
 		<%
 			for(int i = 1; i <= 10; i++) {

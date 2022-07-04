@@ -7,6 +7,7 @@
 		<title>05scriptlet3.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<table border="1">
 		<%
 			for(int i = 1; i <= 10; i++) {
@@ -33,5 +34,6 @@
 				out.print("<hr>");
 			}//for - i
 		%>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>
