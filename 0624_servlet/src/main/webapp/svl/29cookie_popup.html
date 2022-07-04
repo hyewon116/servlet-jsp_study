@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>29cookie_popup.html</title>
+		<script type="text/javascript">
+		alert("쿠키 전체 : " + document.cookie);
+		let notShowPop = false;
+
+		if(document.cookie != ""){
+			let cookieArr = document.cookie.split(";"); //;를 기준으로 자르기
+			alert("배열 : " + cookieArr);
+
+			for(let i = 0; i < cookieArr.length; i++){
+				alert("자르기 전 쿠키 하나 : " + cookieArr[i]);
+				let coo = cookieArr[i].split("=");
+				alert("자른 후 쿠키 하나 : " + coo);
+				if(coo[0].trim() == "notShowPop"){
+					notShowPop = coo[1].trim();
+				}
+			}//for
+		}//if
+		alert(notShowPop);
+		if(notShowPop == "false"){
+			window.open("29popup.html"
+					, "pop_name"
+					, "width=300,height=300,history=no,resizable=no,scrollbar=no,menubar=no");
+		}
+		function deleteCookie() {
+			document.cookie="notShowPop=false;path=/;expires=-1";
+		}
+		</script>
+	</head>
+	<body>
+		<form>
+			<button type="button" onclick="deleteCookie();"> 쿠 키 삭 제 </button>
+		</form>
+	</body>
+</html>

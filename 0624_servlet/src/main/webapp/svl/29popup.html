@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>29popup.html</title>
+		<script type="text/javascript">
+		function setPopUp(obj) {
+			if(obj.checked == true) {//사용자가 체크박스를 체크했다면
+				
+				let expireDate = new Date();
+				//expireDate : 만료 일자를 설정하는 용도로 만든 변수
+				//new Date() : 시스템의 오늘 날짜.
+				//alert(expireDate);
+				expireDate.setDate( expireDate.getDate() + 1 );
+				//alert(expireDate);
+				
+				document.cookie = "notShowPop=true; path=/;expires=" + expireDate.toGMTString();
+				//notShowPop=true인 동안 팝업을 뜨지 않게 하라. notShowPop = 28에서 지정할 변수
+				window.close();
+			}//if
+		}//function
+		</script>
+	</head>
+	<body>
+		<h1>광고 팝업</h1>
+		<form>
+			<input type="checkbox" onclick="setPopUp(this);">
+			24시간 동안 팝업 광고 보지 않기
+		</form>
+	</body>
+</html>
