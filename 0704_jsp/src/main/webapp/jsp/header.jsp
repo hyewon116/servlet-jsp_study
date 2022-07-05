@@ -12,10 +12,10 @@
 	</head>
 	<body>
 		<div class="container">
-			<header class="jumbotron">
+			<header class="jumbotron mb-2">
 				<h3>coding exercise</h3>
 			</header><!-- end of header -->
-			<nav class="btn-group">
+			<nav class="btn-group mb-2">
 				<a href="./01start.jsp">
 					<button class="btn btn-primary">01start.jsp</button>
 				</a>
@@ -41,14 +41,21 @@
 					<button class="btn btn-primary">05scriptlet4.jsp</button>
 				</a>
 			</nav><!-- end of nav -->
-			<main class="mt-3">
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			<nav class="btn-group">
+				<a href="./06request_setAttribute.jsp">
+					<button class="btn btn-primary">06request_setAttribute.jsp</button>
+				</a>
+				<a href="./07session_setAttribute1.jsp">
+					<button class="btn btn-primary">07session_setAttribute1.jsp</button>
+				</a>
+				<a href="./08application_setAttribute1.jsp">
+					<button class="btn btn-primary">08application_setAttribute1.jsp</button>
+				</a>
+				<a href="./08application_setAttribute2.jsp">
+					<button class="btn btn-primary">08application_setAttribute2.jsp</button>
+				</a>
+				<a href="./09exe_search.jsp">
+					<button class="btn btn-primary">09exe_search.jsp</button>
+				</a>
+			</nav><!-- end of nav -->
+			<main class="mt-2">

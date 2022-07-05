@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>09exe_search.jsp</title>
+		<title>10RE_err_page.jsp</title>
 	</head>
 	<body>
 		<%@ include file="./header.jsp" %>
-		<form action="../ExeSearch09" method="get">
-			이름 검색 : <input type="text" id="ename" name="ename">
-			<button type="submit"> S E A R C H </button>
-		</form>
+		<%-- jsp 여러 줄 주석 : 서버에서 서블릿으로 변환 시에 삭제 : 클라이언트에서 안 보임. --%>
+		<h1> <%= session.getAttribute("err_msg") %> </h1>
 		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

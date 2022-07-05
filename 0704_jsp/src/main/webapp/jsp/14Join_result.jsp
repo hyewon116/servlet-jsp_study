@@ -1,17 +1,17 @@
+<%@page import="jsp.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>09exe_search.jsp</title>
+		<title>14Join_result.jsp</title>
 	</head>
 	<body>
 		<%@ include file="./header.jsp" %>
-		<form action="../ExeSearch09" method="get">
-			이름 검색 : <input type="text" id="ename" name="ename">
-			<button type="submit"> S E A R C H </button>
-		</form>
+		<br>
+		<h1> 회원가입에 성공했습니다. </h1>
+		<br>
 		<%@ include file="./footer.jsp" %>
 	</body>
 </html>
