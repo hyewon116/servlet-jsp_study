@@ -12,6 +12,7 @@
 		<title>01start.jsp</title> 
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 	   <%-- 01start.jsp -> 01start_jsp.java(서블릿 파일) -> 01start_jsp.class --%>
 	   <%-- jsp 주석
 	   	 : 여러 줄 주석 가능
@@ -48,5 +49,6 @@
 			HashMap<String,String> map = new HashMap<String,String>();
 			HashSet<String> set = new HashSet<String>();
 		%>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

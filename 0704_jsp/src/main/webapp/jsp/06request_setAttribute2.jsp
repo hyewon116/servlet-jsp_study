@@ -7,6 +7,7 @@
 		<title>06request_setAttribute2.jsp</title>
 	</head>
 	<body>	
+		<%@ include file="./header.jsp" %>
 		<h2>클라이언트에서 전달한 request data는 getParameter로 받는다.</h2>
 		<h1>request.getParameter("txt") : <%= request.getParameter("txt") %></h1> 
 		<h1>request.getParameter("hid") : <%= request.getParameter("hid") %></h1>
@@ -17,6 +18,6 @@
 			disp.forward(request, response);
 		//	response.sendRedirect("./06request_setAttribute3.jsp");
 		%>
-	
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

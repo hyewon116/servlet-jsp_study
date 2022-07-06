@@ -7,10 +7,12 @@
 		<title>08application_setAttribute2.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<h1>08application_setAttribute2.jsp</h1>
 		<h1>session.getAttribute("session_data") :
 		 <%= session.getAttribute("session_data") %></h1>
 		<h1>application.getAttribute("app_data") :
 		 <%= application.getAttribute("app_data") %></h1>
+		 <%@ include file="./footer.jsp" %>
 	</body>
 </html>

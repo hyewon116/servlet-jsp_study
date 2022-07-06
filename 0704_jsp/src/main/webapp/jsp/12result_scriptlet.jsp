@@ -7,6 +7,7 @@
 		<title>12result_scriptlet.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<%
 			for(int i = 1; i <= 6; i++) {
 		%>
@@ -14,5 +15,6 @@
 		<%		
 			}
 		%>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

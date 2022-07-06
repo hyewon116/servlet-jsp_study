@@ -8,10 +8,12 @@
 		<title>11err_test.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<!-- 의도적인 에러 발생 : errorPage로 이동 -->
 		<%
 			String tmp = null;
 			out.print( tmp.length() );  //NullPointerException : 변수는 있는데 값은 없는 것.
 		%>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

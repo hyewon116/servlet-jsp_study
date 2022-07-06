@@ -7,6 +7,7 @@
 		<title>06request_setAttribute.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<h1>jsp data의 전달 범위</h1>
 		<h2>page 범위 : jsp 페이지 내부에서만 의미 있는 data 또는 변수 
 					 : 해당 페이지를 벗어나면 data는 사라진다.	</h2>
@@ -23,5 +24,6 @@
 			<hr>
 			<button type="submit"> request의 범위 </button>
 		</form>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>

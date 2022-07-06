@@ -7,6 +7,7 @@
 		<title>13param_values.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<h1>설문 조사</h1>
 		<form method="get" action="./13param_values_get.jsp">
 			이름 : <input type="text" id="nm" name="nm">
@@ -30,6 +31,7 @@
 			<hr>
 			<button type="submit"> 전 송 </button>
 		</form>
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>
 

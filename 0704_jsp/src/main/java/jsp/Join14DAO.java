@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class Join14DAO {
 	
 	public Join14DAO() {
+		//1. 드라이버 로딩
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -17,17 +18,20 @@ public class Join14DAO {
 
 	private Connection con;
 	private PreparedStatement psmt;
-	private final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private final String URL = "jdbc:oracle:thin:@localhost:1521:xe";  //1521 : 오라클 listener의 포트번호, XE는 Oracle database client의 고유한 service name이다. 디폴트로 XE를 사용한다.
 	private final String USER = "c##scott";
 	private final String PASSWORD = "tiger";
 			
 	public int insertMember(MemberDTO dto) throws SQLException {
 		int successCount = 0;
+		
+		//2. 커넥션 연결
+		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		//3. sql 전송
 		String sql = "insert into member(mno, mid, mpwd, tel1, tel2, "
 				+ "tel3, email1, email2, mdate) values ("
 				+ "mno_seq.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate)";
-			
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		
 		psmt = con.prepareStatement(sql);
 		psmt.setString(1, dto.getMid());
 		psmt.setString(2, dto.getMpwd());
@@ -36,8 +40,11 @@ public class Join14DAO {
 		psmt.setString(5, dto.getTel3());
 		psmt.setString(6, dto.getEmail1());
 		psmt.setString(7, dto.getEmail2());
-		successCount = psmt.executeUpdate();
 		
+		//4. 결과 확인(select -> resultset, insert/update/delete -> int)
+		successCount = psmt.executeUpdate();
+		//★select -> executeQuery(), insert/update/delete -> executeUpdate()
+		//5. close
 		psmt.close();
 		con.close();
 		

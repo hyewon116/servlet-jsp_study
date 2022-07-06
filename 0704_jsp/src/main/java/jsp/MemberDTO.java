@@ -12,7 +12,6 @@ public class MemberDTO {
 	private String email2;
 	private String mdate;
 	
-	
 	public String getMno() {
 		return mno;
 	}

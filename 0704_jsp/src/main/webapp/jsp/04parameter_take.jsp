@@ -7,6 +7,7 @@
 		<title>04parameter_take.jsp</title>
 	</head>
 	<body>
+		<%@ include file="./header.jsp" %>
 		<h2>HttpServletRequest request</h2>
 		<h2>HttpServletResponse response</h2>
 		<h2>PrintWriter out</h2>
@@ -33,6 +34,6 @@
 		<%
 			}
 		%>
-		
+		<%@ include file="./footer.jsp" %>
 	</body>
 </html>
