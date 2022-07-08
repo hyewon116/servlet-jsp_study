@@ -68,7 +68,7 @@ public class FB17DAO {
 		BoardDTO dto = new BoardDTO();
 		con = DriverManager.getConnection(URL, USER, PASSWORD);
 		String sql = "select bno, btitle, bwriter, bcnts, bdate from freeboard "
-				+ "where bno=?";
+				+ " where bno=?";
 		psmt = con.prepareStatement(sql);
 		psmt.setString(1, no); //인자로 받아온 no 세팅
 		rs = psmt.executeQuery();

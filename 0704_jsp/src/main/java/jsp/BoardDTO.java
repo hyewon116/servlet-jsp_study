@@ -8,6 +8,8 @@ public class BoardDTO {
 	private String bwriter;
 	private String bcnts;
 	private String bdate;
+	private String mno;
+	private String mid;
 	
 	public String getBno() {
 		return bno;
@@ -38,5 +40,17 @@ public class BoardDTO {
 	}
 	public void setBdate(String bdate) {
 		this.bdate = bdate;
+	}
+	public String getMno() {
+		return mno;
+	}
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 }
