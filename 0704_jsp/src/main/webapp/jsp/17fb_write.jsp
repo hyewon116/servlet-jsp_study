@@ -8,8 +8,8 @@
 	</head>
 	<body>
 		<%@ include file="./header.jsp" %>
-		<form id="form1" action="<%=rootPath%>/FBList17" method="post"> 
-		<input type="hidden" name="cmd" value="write">
+		<form id="form1" action="<%=rootPath%>/FBList17" method="post"> <!-- 버튼 누르면 이 주소로 이동 -->
+		<input type="hidden" name="cmd" value="write"> <!-- FBList17에서 구분하기 위한 cmd 값 -->
 		<table class="table table-hover">
 			<tbody>
 				<tr>
@@ -59,7 +59,7 @@
 					alert("내용을 입력하세요.");
 					return;
 				}
-				$("#form1").submit(); //다 입력됐으면 제출됨.
+				$("#form1").submit(); //다 입력됐으면 제출됨. 위 form의 action 주소로.
 			});//click
 		});//ready
 		</script>

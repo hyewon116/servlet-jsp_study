@@ -39,7 +39,7 @@ public class FB17DAO {
 			dto.setBwriter( rs.getString("bwriter") );
 			dto.setBcnts( rs.getString("bcnts") );
 			dto.setBdate( rs.getString("bdate") );
-			list.add(dto);
+			list.add(dto); //여기서 dto 1개 = row 한 줄 => list에 한 줄씩 담김. 
 		}//while
 		rs.close();
 		psmt.close();
@@ -54,25 +54,25 @@ public class FB17DAO {
 		String sql = "insert into freeboard (bno, btitle, bwriter, bcnts, bdate)"
 				+ " values (mno_seq.nextval, ?, ?, ?, sysdate)";
 		psmt = con.prepareStatement(sql);
-		psmt.setString(1, dto.getBtitle());
+		psmt.setString(1, dto.getBtitle()); //FBList17에서 dto에 담았던 내용들을 psmt로 세팅.(dbms의 freeboard 테이블에 전달)
 		psmt.setString(2, dto.getBwriter());
 		psmt.setString(3, dto.getBcnts());
 		successCount = psmt.executeUpdate();
 		psmt.close();
 		con.close();
 
-		return successCount;
+		return successCount; //FBList17로 int값(insert의 성공 건수) 리턴.
 	}//write
 	
 	public BoardDTO detail(String no) throws SQLException{
 		BoardDTO dto = new BoardDTO();
 		con = DriverManager.getConnection(URL, USER, PASSWORD);
 		String sql = "select bno, btitle, bwriter, bcnts, bdate from freeboard "
-				+ "where bno = ?";
+				+ "where bno=?";
 		psmt = con.prepareStatement(sql);
 		psmt.setString(1, no); //인자로 받아온 no 세팅
 		rs = psmt.executeQuery();
-		rs.next();
+		rs.next(); //beforefirst에서 first로 이동. (결과가 단 한건이어도 이 과정 필요) -> 안 해주면 칼럼행에 있는 거임.
 		
 		dto.setBno( rs.getString("bno") );
 		dto.setBtitle( rs.getString("btitle") );
@@ -84,8 +84,39 @@ public class FB17DAO {
 		psmt.close();
 		con.close();
 		
-		return dto;
+		return dto; //dto를 도출해서 FBList17로 복귀
 	}//detail
+
+	public int delete(String no) throws SQLException {
+		int successCount = 0;
+		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		String sql = "delete from freeboard where bno=?";
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, no);
+		successCount = psmt.executeUpdate();
+		
+		psmt.close();
+		con.close();
+		
+		return successCount;
+	}
+
+	public int update(String no, String title, String writer, String cnts) throws SQLException {
+		int successCount = 0;
+		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		String sql = "update freeboard set btitle = ?, bwriter = ?, bcnts = ? where bno = ?";
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, title);
+		psmt.setString(2, writer);
+		psmt.setString(3, cnts);
+		psmt.setString(4, no);
+		successCount = psmt.executeUpdate();
+		
+		psmt.close();
+		con.close();
+	
+		return successCount;
+	}//update
 }//class
 
 

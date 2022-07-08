@@ -1,6 +1,7 @@
 package jsp;
 
-public class BoardDTO {
+public class BoardDTO { 
+	//data transfer object : 데이터를 담아서 이동만 시켜주는 객체
 	
 	private String bno;
 	private String btitle;

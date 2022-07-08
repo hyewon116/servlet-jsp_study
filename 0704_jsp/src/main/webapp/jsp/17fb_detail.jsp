@@ -11,7 +11,7 @@
 		<%@ include file="./header.jsp" %>
 		
 		<%
-			BoardDTO dto = (BoardDTO) request.getAttribute("free_board_detail");
+			BoardDTO dto = (BoardDTO) request.getAttribute("free_board_detail"); //정보 담은 dto 가져옴.
 			if(dto == null) {
 		%>
 				<h1> 조회된 데이터가 없습니다. </h1>
@@ -26,7 +26,25 @@
 					<tr><td>작성일시</td><td><%= dto.getBdate() %></td></tr>
 					<tr><td>내용</td><td><%= dto.getBcnts() %></td></tr>
 				</tbody>
-			</table>	
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<a href="<%=rootPath%>/FBList17?cmd=uform&no=<%=dto.getBno()%>">
+								<button type="button" class="btn btn-info float-right"> 
+								게시글 수정 </button>
+							</a>
+							<a href="<%=rootPath%>/FBList17?cmd=delete&no=<%=dto.getBno()%>">
+								<button type="button" class="btn btn-warning float-right"> 
+								게시글 삭제 </button>
+							</a>
+							<a href="<%=rootPath%>/FBList17?cmd=list">
+								<button type="button" class="btn btn-primary float-right"> 
+								게시글 목록 </button>
+							</a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
 		<% 		
 			}
 		%>

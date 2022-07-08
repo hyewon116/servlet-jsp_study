@@ -17,7 +17,7 @@
 		</div>
 		<%
 			ArrayList<BoardDTO> list 
-				= (ArrayList<BoardDTO>) request.getAttribute("free_board_list");
+				= (ArrayList<BoardDTO>) request.getAttribute("free_board_list"); 
 		if(list == null || list.size() == 0) {
 		%>
 			<h1>조회된 데이터가 없습니다. </h1>
@@ -38,9 +38,13 @@
 				<tr>
 					<td><%= dto.getBno() %> </td>
 					<td>
-						<a href="<%= rootPath %>/FBList17?cmd=detail&no=<%=dto.getBno()%>"> 
-						<!-- FBList17 안에 있는 cmd 값과... ? -> 주소가 다 보이는 건 get 방식. FBList17의 get 메소드 안에서 처리 --> 
-							<%= dto.getBtitle() %>
+						<!-- 제목을 클릭하면, 게시글 상세보기를 실행 -->
+						<!-- 서버에 가서, dao를 거쳐, DBMS에서 선택된 1건의 게시글을 조회 -->
+						<!-- 선택된 1건의 게시글을 조회하기 위해, 글번호를 서버로 전달해야 한다. -->
+						<!-- FBList17?cmd=detail : FBList17의 doGet 메소드 내부의 detail 업무 실행 (주소가 다 보이는 건 get 방식) -->
+						<a href="<%= rootPath %>/FBList17?cmd=detail&no=<%=dto.getBno()%>">  
+											 <!-- ?cmd=detail&no= : ?name=value 순서. -->
+							<%= dto.getBtitle() %> <!-- 제목 클릭하면 내용 볼 수 있게 a href 링크 달아줌. -->
 						</a>
 					</td>
 					<td><%= dto.getBwriter() %> </td>

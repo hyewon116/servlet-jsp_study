@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="container"> 
-			<% String rootPath = request.getContextPath(); %> <!-- 0704_jsp --> <!-- 두 번 클리하면 생기는 오류 해결(어떻게 한거지?) -->
+			<% String rootPath = request.getContextPath(); %> <!-- 0704_jsp --> <!-- 두 번 클릭하면 생기는 오류 해결(어떻게 한거지?) -->
 			<nav class="text-right">
 				<%
 					String loginID = (String) session.getAttribute("login_id");
