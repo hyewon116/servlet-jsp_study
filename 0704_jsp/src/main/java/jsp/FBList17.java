@@ -106,7 +106,6 @@ public class FBList17 extends HttpServlet {
 										, request.getContextPath() + "jsp/main.jsp"
 										, "메인으로 바로가기");
 				response.sendRedirect(request.getContextPath() + "/jsp/fail_page.jsp");
-				
 				return;
 			}//catch
 			

@@ -11,56 +11,135 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.eclipse.jdt.internal.compiler.impl.IntConstant;
+
 public class MB18DAO {
-	
+
 	Context initContext;
 	Context envContext;
 	DataSource ds;
 	Connection con;
 	PreparedStatement psmt;
 	ResultSet rs;
-	
-	public MB18DAO () {
+
+	public MB18DAO() {
 		try {
-			initContext = new InitialContext(); //InitialContext = 톰캣 실행환경 
-			envContext = (Context) initContext.lookup("java:/comp/env"); //lookup : 톰캣 실행환경의 변수들을 찾는 검색 메소드, java:/comp/env : 변수명
-			ds = (DataSource) envContext.lookup("jdbc/myoracle"); //톰캣 소스를 자바의 기본 소스로 변경? jdbc/myoracle : context.xml에서 설정해준 이름
-			//context, InitialContext  -> javax.naming import 
-		
-		} catch (NamingException e) {
+			initContext = new InitialContext();
+			envContext = (Context) initContext.lookup("java:/comp/env");
+			ds = (DataSource) envContext.lookup("jdbc/myoracle");
+		} catch( NamingException e ) {
 			e.printStackTrace();
-		} 
-		
+		}
 	}//constructor
 
 	public ArrayList<BoardDTO> list() throws SQLException {
-		
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
-		
-		con = ds.getConnection();  
-		
+
+		con = ds.getConnection();
+
 		String sql = "select mb.bno, mb.btitle, mb.mno, m.mid, mb.bcnts, mb.bdate"
 				+ " from memberboard mb, member m"
-				+ " where mb.mno = m.mno"; 
+				+ " where mb.mno = m.mno";
 		psmt = con.prepareStatement(sql);
-		rs = psmt.executeQuery(); 
+		rs = psmt.executeQuery();
+
 		while(rs.next()) {
 			BoardDTO dto = new BoardDTO();
-			dto.setBno(rs.getString("bno"));
-			dto.setBtitle(rs.getString("btitle"));
-			dto.setMno(rs.getString("mno"));
-			dto.setMid(rs.getString("mid"));
-			dto.setBcnts(rs.getString("bcnts"));
-			dto.setBdate(rs.getString("bdate"));
+			dto.setBno( rs.getString("bno") );
+			dto.setBtitle( rs.getString("btitle") );
+			dto.setMno( rs.getString("mno") );
+			dto.setMid( rs.getString("mid") );
+			dto.setBcnts( rs.getString("bcnts") );
+			dto.setBdate( rs.getString("bdate") );
 			list.add(dto);
 		}//while
+
+		rs.close();
+		psmt.close();
+		con.close();
+
+		return list;
+	}//list
+
+	public int write(String title, String cnts, String id) throws SQLException {
+		int successCount = 0;
+		con = ds.getConnection();
+		String sql = "insert into memberboard (bno, btitle, mno, bcnts, bdate)"
+				+ " values (mno_seq.nextval, ?"
+				+ ", (select mno from member where mid = ?), ?, sysdate)";
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, title);
+		psmt.setString(2, id);
+		psmt.setString(3, cnts);
+		successCount = psmt.executeUpdate();
+		
+		psmt.close();
+		con.close();
+		
+		return successCount;
+	}//write
+
+	public BoardDTO detail(String bno) throws SQLException {
+		
+		BoardDTO dto = new BoardDTO();
+		con = ds.getConnection();
+		String sql = "select mb.bno, mb.btitle, mb.mno, m.mid, mb.bcnts, mb.bdate"
+				+ "	from memberboard mb, member m"
+				+ "	where bno = ? and mb.mno = m.mno "; //bno = ? and mb.mno = m.mno -> and 앞뒤에 놓인 쿼리 순서 중요. 번호 먼저 찾는 게 효율이 좋다!!
+		
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, bno);
+		rs = psmt.executeQuery();
+		rs.next();
+		
+		dto.setBno(rs.getString("bno"));
+		dto.setBtitle(rs.getString("btitle"));
+		dto.setMno(rs.getString("mno"));
+		dto.setMid(rs.getString("mid"));
+		dto.setBcnts(rs.getString("bcnts"));
+		dto.setBdate(rs.getString("bdate"));
 		
 		rs.close();
 		psmt.close();
 		con.close();
-			
-		return list;
-	}//list
+		
+		return dto;
+	}//detail
+
+	public int delete(String bno, String id) throws SQLException {
+		int successCount = 0;
+		con = ds.getConnection();
+		
+		String sql = "delete from memberboard where bno = ?"
+				+ " and mno = (select mno from member where mid = ?)"; //내가 쓴 글만 지울수 있도록 조치.
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, bno);
+		psmt.setString(2, id);
+		
+		successCount = psmt.executeUpdate();
+		
+		psmt.close();
+		con.close();
+		
+		return successCount;
+	}
+
+	public int update (String no, String title, String writer, String cnts) throws SQLException {
+		
+		int successCount = 0;
+		con = ds.getConnection();
+		String sql = "update memberboard set btitle = ?, bwiter = ?, bcnts =? where bno = ?"
+				+ " and mno = (select mno from member where mid = ?)";
+		
+		psmt = con.prepareStatement(sql);
+		psmt.setString(1, title);
+		psmt.setString(2, writer);
+		psmt.setString(3, cnts);
+		psmt.setString(4, no);
+		successCount = psmt.executeUpdate();
+		
+		return successCount;
+	}
 }//class
 
 /*

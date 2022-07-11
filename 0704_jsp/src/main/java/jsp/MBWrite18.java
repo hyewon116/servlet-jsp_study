@@ -1,6 +1,8 @@
 package jsp;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,37 +13,45 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/MBWrite18")
 public class MBWrite18 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
+	private MB18DAO dao;
     public MBWrite18() {
         super();
-    }
+        dao = new MB18DAO();
+    }//constructor
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response); //실수로 get방식으로 들어오더라도 무조건 post로 실행되도록.
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}//doGet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		//로그인 검사 start!!!
-		HttpSession session = request.getSession(); //1. 세션 받아오기 
-		String loginID = (String) session.getAttribute("login_id"); //2. Login15.java 파일에서 "login_id" 설정한 아이디 정보 받아옴
-		if(loginID == null || loginID.trim().length() == 0 ) {
-			response.sendRedirect(request.getContextPath() + "/jsp/main.jsp"); //로그인 정보가 없다면 메인으로 보내라!!
-			return; //반드시 리턴 수행!!
+		if( UtilSessionLogin.isLogin( request.getSession() ) == false ) {
+			response.sendRedirect( request.getContextPath() + "/jsp/main.jsp" );
+			return;
 		}
 		//로그인 검사 end!!!
-		
 		String title = request.getParameter("title");
 		String cnts = request.getParameter("cnts");
+		String loginId = (String) request.getSession().getAttribute("login_id");
 		int successCount = 0;
-		//successCount = dao.write(title, cnts, loginID);
-		if( successCount == 1 ) {//글쓰기 DBMS insert 성공
-			
-			
-		} else {//글쓰기 DBMS insert 실패
-			
+		try {
+			successCount = dao.write(title, cnts, loginId);
+		} catch( SQLException e ) {
+			e.printStackTrace();
+			UtilMessage.setSessionMsg(request.getSession(), "DBMS 오류"
+					, request.getContextPath() + "/MBList18", "회원 게시판 목록으로 바로가기");
+			response.sendRedirect(request.getContextPath() + "/jsp/fail_page.jsp");
+			return;
 		}
-		
+		if( successCount == 1 ) {//글쓰기 DBMS insert 성공
+			response.sendRedirect("./MBList18");
+		} else {//글쓰기 DBMS insert 실패
+			UtilMessage.setSessionMsg(request.getSession(), "회원 게시판 쓰기 실패"
+					, request.getContextPath() + "/MBList18", "회원 게시판 목록으로 바로가기");
+			response.sendRedirect(request.getContextPath() + "/jsp/fail_page.jsp");
+		}
 	}//doPost
 
-}
+}//class

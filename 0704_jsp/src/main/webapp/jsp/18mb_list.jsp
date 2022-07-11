@@ -8,17 +8,14 @@
 		<meta charset="UTF-8">
 		<title>18mb_list.jsp</title>
 	</head>
-	<body>
+	<body>	
+		<%@ include file="./login_check.jsp" %>
 		<%@ include file="./header.jsp" %> <!-- header 파일에 loginID 객체가 만들어져 있음 -->
 		<h1>Member Board 회원 전용 게시판</h1>
 		<a href="<%=rootPath%>/jsp/18mb_write.jsp"> 
 			<button type="button" class="btn btn-info float-right mb-1">글 쓰러 가기</button>
 		</a>
 		<%
-			if(loginID == null || loginID.trim().length() == 0) { //header 파일에 있던 loginID 객체
-				response.sendRedirect(rootPath + "/jsp/main.jsp");
-				return;
-			} else { 
 				ArrayList<BoardDTO> list 
 					= (ArrayList<BoardDTO>) request.getAttribute("member_board_list");
 				if( list == null || list.size() == 0 ) {
@@ -41,19 +38,21 @@
 		%>
 					<tr>
 						<td><%= dto.getBno() %></td>
-						<td><%= dto.getBtitle() %></td>
+						<td>
+							<a href="<%=rootPath%>/MBDetail18?&bno=<%=dto.getBno()%>">
+								<%= dto.getBtitle() %>
+							</a>
+						</td>
 						<td><%= dto.getMid() %></td>
 						<td><%= dto.getBdate() %></td>
 					</tr>
-					
 		<% 
 					}
 		%>	
-				</tbody>
-			</table>
+					</tbody>
+				</table>
 		<%		
 				}//else
-			}//else
 		%>
 		<%@ include file="./footer.jsp" %>
 	</body>
