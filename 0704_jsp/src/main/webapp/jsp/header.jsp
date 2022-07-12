@@ -24,7 +24,7 @@
 					} else {
 				%>
 						<a class="mr-2"><%= loginID %></a>
-						<a href="../Logout16">로그아웃</a>
+						<a href= "<%=rootPath%>/Logout16">로그아웃</a>
 				<%		
 					}
 				%>
@@ -106,5 +106,13 @@
 					<button class="btn btn-primary">MBList18</button>
 				</a>
 				
+			</nav><!-- end of nav -->
+			<nav class="btn-group">
+				<a href="<%=rootPath%>/jsp/19jsp_action_tag_include.jsp">
+					<button class="btn btn-primary">19jsp_action_tag_include.jsp</button>
+				</a>
+				<a href="<%=rootPath%>/jsp/20jsp_action_tag_forward.jsp">
+					<button class="btn btn-primary">20jsp_action_tag_forward.jsp</button>
+				</a>
 			</nav><!-- end of nav -->
 			<main class="mt-2">

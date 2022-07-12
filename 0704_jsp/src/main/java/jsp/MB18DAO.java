@@ -111,7 +111,7 @@ public class MB18DAO {
 		con = ds.getConnection();
 		
 		String sql = "delete from memberboard where bno = ?"
-				+ " and mno = (select mno from member where mid = ?)"; //내가 쓴 글만 지울수 있도록 조치.
+				+ " and mno = (select mno from member where mid = ?)"; //본인이 쓴 글만 지울수 있도록 조치.
 		psmt = con.prepareStatement(sql);
 		psmt.setString(1, bno);
 		psmt.setString(2, id);
@@ -122,25 +122,31 @@ public class MB18DAO {
 		con.close();
 		
 		return successCount;
-	}
+	}//delete
 
-	public int update (String no, String title, String writer, String cnts) throws SQLException {
+	public int update (String no, String title, String cnts, String id) throws SQLException {
 		
 		int successCount = 0;
 		con = ds.getConnection();
-		String sql = "update memberboard set btitle = ?, bwiter = ?, bcnts =? where bno = ?"
-				+ " and mno = (select mno from member where mid = ?)";
+		
+		String sql = "update memberboard set btitle = ?, bcnts = ? where bno = ?"
+				+ " and mno = (select mno from member where mid = ?)"; //본인이 쓴 글만 수정할 수 있도록 조치.
 		
 		psmt = con.prepareStatement(sql);
 		psmt.setString(1, title);
-		psmt.setString(2, writer);
-		psmt.setString(3, cnts);
-		psmt.setString(4, no);
+		psmt.setString(2, cnts);
+		psmt.setString(3, no);
+		psmt.setString(4, id);
 		successCount = psmt.executeUpdate();
 		
+		psmt.close();
+		con.close();
+
 		return successCount;
-	}
+	}//update
+	
 }//class
+
 
 /*
  * create table memberboard(

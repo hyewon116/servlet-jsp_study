@@ -40,22 +40,31 @@
 					</tr>
 				</tbody>
 			</table>
-
-	<!-- 내 글이 아니면 수정/삭제하지 못하도록 막기 -->			
+			
 	<%
-		if(loginID.equals(dto.getMid())) {
+		if(loginID.equals(dto.getMid())) { //내 글일 때만 수정&삭제 가능
 	%>
-		<div class = "clearfix"> <!-- footer위에 뜨게 하지 않도록 설정 -->
+		<div class = "clearfix"> <!-- footer 위에 뜨게 하지 않도록 설정 -->
+			<a href="<%=rootPath%>/MBList18">
+				<button class="btn btn-outline-primary float-right"> 목 록 </button>
+			</a>
 			<a href="<%=rootPath%>/MBUform18?bno=<%=dto.getBno()%>">
-				<button class="btn btn-info float-right"> 게 시 글 수 정 </button>
+				<button class="btn btn-outline-info float-right"> 게 시 글 수 정 </button>
 			</a>
 			<a href="<%=rootPath%>/MBDelete18?bno=<%=dto.getBno()%>">
-				<button class="btn btn-warning float-right"> 게 시 글 삭 제 </button>
+				<button class="btn btn-outline-warning float-right"> 게 시 글 삭 제 </button>
 			</a>
 		</div>
 		<%
-			}//if(loginID.equals(dto.getMid()))
-		
+			} else { //내 글이 아니어도 목록은 볼 수 있게
+		%>
+			<div class = "clearfix">
+				<a href="<%=rootPath%>/MBList18">
+				<button class="btn btn-outline-primary float-right" style="background-color:mintcream;"> 목 록 </button>
+				</a>
+			</div>
+		<%
+			}
 		%>
 			
 		<%

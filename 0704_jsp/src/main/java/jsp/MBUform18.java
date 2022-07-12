@@ -56,7 +56,6 @@ public class MBUform18 extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/jsp/fail_page.jsp");
 				return;
 			}
-			
 	}//doGet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

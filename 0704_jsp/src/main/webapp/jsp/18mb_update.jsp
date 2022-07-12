@@ -22,7 +22,7 @@
 		%>
 		<h1>Member Board 회원 전용 게시판 글 수정</h1>
 		<form id="form1" action="<%=rootPath%>/MBUpdate18" method="post"> <!-- get 방식은 양이 많으면 오류날 확률 높. 이 파일은 post 방식이 적절 -->
-		<input type="hidden" name="bno" value="<%= dto.getBno() %>"> <!-- get 방식이 아니라서 hidden으로 값을 줘야 함. -->
+		<input type="hidden" name="bno" value="<%=dto.getBno()%>">
 		<table class="table table-hover">
 			<tbody>
 				<tr>
@@ -34,13 +34,15 @@
 				</tr>
 				<tr>
 					<td>작성자</td> <!-- 로그인한 유저가 쓰는 게시판이라 작성자란은 자동 생성되도록. -->
-					<td><%=loginID%></td>
+					<td>
+					<%=dto.getMid()%>
+					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td>
 						<textarea rows="10" id="cnts" name="cnts"
-								class="form-control" value="<%=dto.getBcnts()%>"></textarea>
+								class="form-control"><%=dto.getBcnts()%></textarea>
 						<script type="text/javascript">
 						CKEDITOR.replace('cnts');
 						</script>
